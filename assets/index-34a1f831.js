@@ -1,0 +1,1 @@
+import{_ as s,o,c as t,p as a,a as c,b as _}from"./index-b2a32c51.js";const d={name:"Login",setup(){return{}}},n=e=>(a("data-v-c06019da"),e=e(),c(),e),p={class:"login"},i=n(()=>_("h1",null,"Logasdfasdin",-1)),r=[i];function l(e,u,f,h,x,m){return o(),t("div",p,r)}const g=s(d,[["render",l],["__scopeId","data-v-c06019da"]]);export{g as default};
