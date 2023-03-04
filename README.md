@@ -1,5 +1,3 @@
-<img src="https://capsule-render.vercel.app/api?type=Waving&color=777&height=200&animation=fadeIn&section=header&text=CRM-Vue-星之往昔&fontAlignY=30&desc=探索%20生存-[CodeLing-Stuido]-跑团%20冒险&fontSize=40" />
-
 ![](https://img.shields.io/badge/%E7%8A%B6%E6%80%81-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD-green)<!--![](https://img.shields.io/badge/%E7%8A%B6%E6%80%81-%E5%B0%B1%E7%BB%AA-orange)-->
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![](https://img.shields.io/crates/l/s)](https://img.shields.io/crates/l/s)

@@ -1,4 +1,4 @@
-# 监听 master 分支
+# 监听 main 分支
 on:
   push:
     branches:
