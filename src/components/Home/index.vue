@@ -3,9 +3,9 @@
     <el-container>
       <el-header>Header</el-header>
       <el-container>
-        <!--			左侧导航-->
+        <!--左侧导航-->
         <NavMenu />
-        <!--				主体内容-->
+        <!--主体内容-->
         <el-main>
           <router-view />
         </el-main>

@@ -5,9 +5,14 @@ export const routes: Array<RouteRecordRaw> = [
     // 重定向
     {
         path    : '/',
-        redirect: '/home'
+        redirect: '/login'
     },
     // 登录
+    {
+        path     : '/login',
+        name     : 'login',
+        component: () => import('../views/Login/index.vue')
+    },
     {
     // 主页
         path     : '/home',
