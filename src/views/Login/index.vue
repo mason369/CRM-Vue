@@ -38,7 +38,7 @@
                                 </el-col>
                             </el-row>
                             <el-col :span="24" class="sub-menu-btn" style="text-align: center">
-                                <el-button style="width: 140px" type="primary">登录</el-button>
+                                <el-button style="width: 140px" type="primary" @click="submitLogin">登录</el-button>
                                 <el-button style="width: 140px">注册</el-button>
                             </el-col>
                         </el-form>
@@ -139,6 +139,7 @@ const getMsg = () => {
         getMsgLoading.value = false;
     }, 2000);
 };
+// submitLogin
 </script>
 
 <style lang="scss" scoped>
