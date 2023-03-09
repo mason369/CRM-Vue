@@ -1,9 +1,9 @@
 <template>
     <div class="login">
         <el-row class="login-box">
-            <el-col class="login-left" :span="8"><p class="login-title">CRM管理系统</p></el-col>
+            <el-col class="login-left" :span="9"><p class="login-title">CRM管理系统</p></el-col>
             <!--			<mysvg name="avatar"  color="#165DFF" width=18 height=128></mysvg>-->
-            <el-col class="login-right" :span="16">
+            <el-col class="login-right" :span="15">
                 <el-tabs class="login-tabs" v-model="activeName">
                     <el-tab-pane label="账号登录" name="first">
                         <el-form
@@ -22,7 +22,7 @@
                                     :prefix-icon="User"
                                 />
                             </el-form-item>
-                            <el-form-item label="密码">
+                            <el-form-item label="密码" prop="region">
                                 <el-input
                                     type="password"
                                     placeholder="请输入密码"
@@ -33,22 +33,22 @@
                             </el-form-item>
                             <el-row>
                                 <el-col :span="24" class="login-bottom-info">
-                                    <el-checkbox v-model="checked">记住密码 </el-checkbox>
-                                    <el-link class="forget-the-password" type="primary">忘记密码? </el-link>
+                                    <el-checkbox v-model="checked">记住密码</el-checkbox>
+                                    <el-link class="forget-the-password" type="primary">忘记密码?</el-link>
                                 </el-col>
                             </el-row>
                             <el-col :span="24" class="sub-menu-btn" style="text-align: center">
-                                <el-button style="width: 140px" type="primary">登录 </el-button>
-                                <el-button style="width: 140px">注册 </el-button>
+                                <el-button style="width: 140px" type="primary">登录</el-button>
+                                <el-button style="width: 140px">注册</el-button>
                             </el-col>
                         </el-form>
                     </el-tab-pane>
-                    <el-tab-pane label="手机登录" name="second">
+                    <el-tab-pane label="手机登录" name="second" class="mobile-login-box">
                         <el-form
                             :label-position="labelPosition"
                             label-width="100px"
                             :model="formLabelAlign"
-                            style="max-width: 300px"
+                            style="max-width: 400px"
                             class="login-input-box"
                         >
                             <!--手机登录-->
@@ -63,6 +63,7 @@
                                 <el-row>
                                     <el-col :span="16">
                                         <el-input
+                                            class="form-control"
                                             type="text"
                                             v-model="formLabelAlign.name"
                                             placeholder="请输入验证码"
@@ -70,7 +71,13 @@
                                         />
                                     </el-col>
                                     <el-col :span="8">
-                                        <el-button type="primary">获取验证码 </el-button>
+                                        <el-button
+                                            @click="getMsg"
+                                            type="primary"
+                                            class="getMsg-box"
+                                            :loading="getMsgLoading"
+                                            >获取验证码
+                                        </el-button>
                                     </el-col>
                                 </el-row>
                             </el-form-item>
@@ -116,18 +123,46 @@ const userRules = reactive({
         { required: true, message: '请输入用户名', trigger: 'blur' },
         { min: 3, message: '长度在 3 到 5 个字符', trigger: 'blur' },
         { pattern: /^[a-zA-Z]+$/, message: '只能输入英文', trigger: 'blur' }
+    ],
+    region: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 6, message: '长度在 6 到 11 个字符', trigger: 'blur' },
+        //必须包括数字和字母
+        { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '必须包括数字和字母', trigger: 'blur' }
     ]
 });
+// 手机登录获取验证码
+const getMsgLoading = ref(false);
+const getMsg = () => {
+    getMsgLoading.value = true;
+    setTimeout(() => {
+        getMsgLoading.value = false;
+    }, 2000);
+};
 </script>
 
 <style lang="scss" scoped>
+.mobile-login-box {
+    :deep(.el-input) {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 170px;
+    }
+
+    .getMsg-box {
+        margin-left: 8px;
+    }
+}
+
 .sub-menu-btn {
     margin-top: 20px;
 }
 
 .login-bottom-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -153,7 +188,7 @@ const userRules = reactive({
 .login-tabs {
     //	居中
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -208,8 +243,8 @@ const userRules = reactive({
         left: 50%;
         transform: translate(-50%, -50%);
         //	宽高
-        width: 600px;
-        height: 340px;
+        width: 750px;
+        height: 350px;
         //	背景
         background: #fff;
         //	圆角
