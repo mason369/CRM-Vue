@@ -27,10 +27,19 @@
                                     placeholder="请输入密码"
                                     :prefix-icon="Hide"
                                     v-model="formLabelAlign.region"
+                                    class="password-input"
                                 />
                             </el-form-item>
-                            <el-button type="primary">立即创建</el-button>
-                            <el-button>取消</el-button>
+                            <el-row>
+                                <el-col :span="24" class="login-bottom-info">
+                                    <el-checkbox v-model="checked">记住密码</el-checkbox>
+                                    <el-link class="forget-the-password" type="primary">忘记密码?</el-link>
+                                </el-col>
+                            </el-row>
+                            <el-col :span="24" class="sub-menu-btn" style="text-align: center">
+                                <el-button style="width: 140px" type="primary">登录</el-button>
+                                <el-button style="width: 140px">注册</el-button>
+                            </el-col>
                         </el-form>
                     </el-tab-pane>
                     <el-tab-pane label="手机登录" name="second">
@@ -41,15 +50,30 @@
                             style="max-width: 300px"
                             class="login-input-box"
                         >
+                            <!--2手机登录-->
                             <el-form-item label="手机号">
-                                <!--添加图标-->
-                                <el-input type="text" v-model="formLabelAlign.name" prefix-icon="View" />
+                                <el-input
+                                    type="text"
+                                    v-model="formLabelAlign.name"
+                                    placeholder="请输入手机号"
+                                    :prefix-icon="User"
+                                />
+                                <!--输入与获取验证码-->
+                                <el-row>
+                                    <el-col :span="16">
+                                        <el-input
+                                            type="text"
+                                            v-model="formLabelAlign.name"
+                                            placeholder="请输入验证码"
+                                            :prefix-icon="User"
+                                        />
+                                    </el-col>
+                                    <el-col :span="8">
+                                        <el-button type="primary">获取验证码</el-button>
+                                    </el-col>
+                                </el-row>
                             </el-form-item>
-                            <el-form-item label="验证码">
-                                <el-input type="text" v-model="formLabelAlign.region" />
-                            </el-form-item>
-                            <el-button type="primary">立即创建</el-button>
-                            <el-button>取消</el-button>
+                            <el-button type="primary">登录</el-button>
                         </el-form>
                     </el-tab-pane>
                     <el-tab-pane label="扫码登录" name="third">Role</el-tab-pane>
@@ -71,6 +95,7 @@ const { name } = storeToRefs(userStore);
 console.log(name.value);
 userStore.updateName('李四');
 console.log(name.value);
+const checked = ref(false);
 
 enum LabelPosition {
     Top = 'top',
@@ -93,6 +118,16 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </script>
 
 <style lang="scss" scoped>
+.sub-menu-btn {
+    margin-top: 20px;
+}
+
+.login-bottom-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 :deep(.el-form-item__label) {
     width: 70px !important;
 }
