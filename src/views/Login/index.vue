@@ -59,7 +59,7 @@ import { reactive, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/modules/user';
 import type { TabsPaneContext } from 'element-plus';
-import { User, Hide } from '@element-plus/icons-vue';
+import { Hide, User } from '@element-plus/icons-vue';
 
 const userStore = useUserStore();
 const { name } = storeToRefs(userStore);
@@ -91,6 +91,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 :deep(.el-form-item__label) {
   width: 70px !important;
 }
+
 :deep(.el-tabs__item) {
   padding: 0 0;
 }
