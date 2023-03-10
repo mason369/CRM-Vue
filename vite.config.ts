@@ -79,7 +79,7 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
                     rewrite     : (path: string) => path.replace(/^\/api-dev/, '')
                 },
                 '/api-pro': {
-                    target      : 'http://47.92.88.225:8080',
+                    target      : 'http://www.weather.com.cn',
                     changeOrigin: true,
                     rewrite     : (path: string) => path.replace(/^\/api-pro/, '')
                 }
