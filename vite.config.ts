@@ -8,18 +8,16 @@ import { ElementPlusResolver, NaiveUiResolver } from 'unplugin-vue-components/re
 import { createHtmlPlugin } from 'vite-plugin-html';
 import viteCompression from 'vite-plugin-compression';
 import { visualizer } from 'rollup-plugin-visualizer';
-// 导入svgloader的插件构建函数
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 // 接口定义
 interface ViteConfigOptions {
-  command: 'build' | 'serve';
-  mode: string;
+    command: 'build' | 'serve';
+    mode: string;
 }
 
 interface DefineConfigOptions {
-  command: 'build' | 'serve';
-  mode: string;
+    command: 'build' | 'serve';
+    mode: string;
 }
 
 function defineConfig({ command, mode }: DefineConfigOptions) {
@@ -48,13 +46,6 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
                 dts      : 'src/components.d.ts',
                 resolvers: [NaiveUiResolver(), ElementPlusResolver()]
             }),
-            // svg图标插件
-            createSvgIconsPlugin({
-                // 指定需要缓存的图标文件夹
-                iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
-                // 指定svg图片名字的格式
-                symbolId: 'icon-[name]'
-            }),
             // 默认会向 index.html 注入 .env 文件的内容，类似 vite 的 loadEnv函数
             // 还可配置entry入口文件， inject自定义注入数据等
             createHtmlPlugin(),
@@ -82,10 +73,15 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
             strictPort: false,
             open      : true,
             proxy     : {
-                '/api': {
-                    target      : 'http://localhost:3001',
+                '/api-dev': {
+                    target      : 'http://www.weather.com.cn',
                     changeOrigin: true,
-                    rewrite     : (path: string) => path.replace(/^\/api/, '')
+                    rewrite     : (path: string) => path.replace(/^\/api-dev/, '')
+                },
+                '/api-pro': {
+                    target      : 'http://www.weather.com.cn',
+                    changeOrigin: true,
+                    rewrite     : (path: string) => path.replace(/^\/api-pro/, '')
                 }
             }
         },

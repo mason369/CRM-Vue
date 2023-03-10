@@ -11,12 +11,10 @@ declare global {
     const createApp: typeof import('vue')['createApp'];
     const createPinia: typeof import('pinia')['createPinia'];
     const customRef: typeof import('vue')['customRef'];
-    const debug: typeof import('./utils/debug')['default'];
     const defineAsyncComponent: typeof import('vue')['defineAsyncComponent'];
     const defineComponent: typeof import('vue')['defineComponent'];
     const defineStore: typeof import('pinia')['defineStore'];
     const effectScope: typeof import('vue')['effectScope'];
-    const geo: typeof import('./utils/geo')['geo'];
     const getActivePinia: typeof import('pinia')['getActivePinia'];
     const getCurrentInstance: typeof import('vue')['getCurrentInstance'];
     const getCurrentScope: typeof import('vue')['getCurrentScope'];
@@ -57,13 +55,11 @@ declare global {
     const resolveComponent: typeof import('vue')['resolveComponent'];
     const setActivePinia: typeof import('pinia')['setActivePinia'];
     const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix'];
-    const setRotate: typeof import('./utils/util')['setRotate'];
     const shallowReactive: typeof import('vue')['shallowReactive'];
     const shallowReadonly: typeof import('vue')['shallowReadonly'];
     const shallowRef: typeof import('vue')['shallowRef'];
     const storage: typeof import('./utils/storage')['storage'];
     const storeToRefs: typeof import('pinia')['storeToRefs'];
-    const toPhoneCall: typeof import('./utils/util')['toPhoneCall'];
     const toRaw: typeof import('vue')['toRaw'];
     const toRef: typeof import('vue')['toRef'];
     const toRefs: typeof import('vue')['toRefs'];
