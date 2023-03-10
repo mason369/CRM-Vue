@@ -74,9 +74,9 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
             open      : true,
             proxy     : {
                 '/api-dev': {
-                    target      : 'http://www.weather.com.cn',
+                    target      : 'http://47.92.88.225:8080',
                     changeOrigin: true,
-                    rewrite     : (path: string) => path.replace(/^\/api-dev/, '')
+                    rewritePath : (path: string) => path.replace(/^\/api-dev/, '')
                 },
                 '/api-pro': {
                     target      : 'http://www.weather.com.cn',

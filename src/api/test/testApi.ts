@@ -1,10 +1,10 @@
 import http from '@/utils/http';
-import { WEATHER_NOW, WeatherApi, WeatherNow } from '@/api/test/index';
+import { GOODS_ID, Goods, goodsIdApi } from '@/api/test/index';
 
-class WeatherService implements WeatherApi {
-    getWeatherNow(): Promise<WeatherNow> {
-        return http.get(WEATHER_NOW);
+class GoodsIdService implements goodsIdApi {
+    getGoodsId(id: string): Promise<Goods> {
+        return http.get(GOODS_ID, { q: id });
     }
 }
 
-export default new WeatherService();
+export default new GoodsIdService();

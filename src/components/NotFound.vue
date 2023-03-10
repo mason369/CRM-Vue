@@ -12,7 +12,8 @@
 
 <script>
 import { reactive } from 'vue';
-import WeatherService from '@/api/test/testApi.ts'; // 引入WeatherService
+// import WeatherService from '@/api/test/testApi.ts'; // 引入WeatherService
+import GoodsIdService from '@/api/test/testApi.ts';
 
 export default {
     name: 'NotFound',
@@ -26,11 +27,11 @@ export default {
             });
         };
         // 通过调用WeatherService.getWeather()方法获取天气数据//使用async/await
-        const getWeather = async() => {
-            const weather = await WeatherService.getWeatherNow();
-            console.log(weather.weatherinfo);
+        const getTest = async() => {
+            const test = await GoodsIdService.getGoodsId('12');
+            console.log(test);
         };
-        getWeather();
+        getTest();
         return { letters, animate, animated };
     }
 };

@@ -1,10 +1,13 @@
-// http://www.weather.com.cn/data/sk/101190408.html
-export const WEATHER_NOW = '/data/sk/101190408.html';
+// test
+export const GOODS_ID = '/api/test/getGoods';
 
-export interface WeatherNow {
-    weatherinfo: Record<string, never>;
+export interface Goods {
+    id?: number;
+    name?: string;
+    price?: number;
+    stock?: number;
 }
 
-export interface WeatherApi {
-    getWeatherNow(): Promise<WeatherNow>;
+export interface goodsIdApi {
+    getGoodsId(id: string): Promise<Goods>;
 }

@@ -12,7 +12,7 @@ export const request = <T = any>(config: AxiosRequestConfig): Promise<T> => {
                 resolve(res.data);
             })
             .catch((err) => {
-                console.log('request fail:', err);
+                console.log(' 请求失败：', err);
             });
     });
 };
