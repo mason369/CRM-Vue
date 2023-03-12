@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/mason369/CRM-Vue/compare/v1.0.1...v1.1.0) (2023-03-12)
+
+
+### Features
+
+* 重构文件目录、依赖关系 ([c65a7ad](https://github.com/mason369/CRM-Vue/commit/c65a7ad2e5538ce4e0db166fb8412a01dcf82941))
+
 ## [1.0.1](https://github.com/mason369/CRM-Vue/compare/v1.0.0...v1.0.1) (2023-03-12)
 
 
