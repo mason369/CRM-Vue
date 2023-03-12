@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/mason369/CRM-Vue/compare/v1.0.0...v1.0.1) (2023-03-12)
+
+
+### update
+
+* 更新依赖 ([bed77da](https://github.com/mason369/CRM-Vue/commit/bed77da5824029794af6267185a50c84fd9d5cd5))
+
 ## 1.0.0 (2023-03-02)
 
 
