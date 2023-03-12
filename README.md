@@ -8,7 +8,7 @@
 ![](https://img.shields.io/badge/Vue-%5E3.2.47-success)
 ![](https://img.shields.io/badge/Node-%20%5E16.18.0-brightgreen)
 ![](https://img.shields.io/badge/Vite-%20%5E4.1.4-brightgreen)
-![](https://img.shields.io/badge/npm-%5E9.5.1-blue)
+![](https://img.shields.io/badge/cnpm-%5E9.0.1-red)
 
  <h2>内容列表</h2>
 
@@ -100,22 +100,28 @@ Progressive-Tune 遵循 [Contributor Covenant](http://contributor-covenant.org/v
 安装依赖：
 
 ```
-npm install
+cnpm install
 ```
 
 启动：
 
 ```
-npm run dev
+cnpm run dev
 ```
 
 部署：
 
 ```
-npm run build
+cnpm run build
 ```
 
 执行命令后会得到 dist 目录，可以放到自己的 web 服务器指定的路径下，然后访问即可。
+
+或者运行:
+```
+cnpm run preview
+```
+进行生产预览
 
 ---
 
