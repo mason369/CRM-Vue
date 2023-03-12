@@ -1,7 +1,5 @@
-// test
+import http from '@/utils/http';
 export const GOODS_ID = '/api/test/getGoods';
-// http://www.weather.com.cn/data/sk/101190408.html
-export const WEATHER_NOW = '/data/sk/101190408.html';
 
 export interface Goods {
     id?: number;
@@ -9,10 +7,16 @@ export interface Goods {
     price?: number;
     stock?: number;
 }
-export interface WeatherNow {
-    weatherinfo: Record<string, never>;
-}
+
 export interface goodsIdApi {
     getGoodsId(id: string): Promise<Goods>;
-    getWeatherNow(): Promise<WeatherNow>;
 }
+
+// 实现
+class GoodsIdService implements goodsIdApi {
+    getGoodsId(id: string): Promise<Goods> {
+        return http.get(GOODS_ID, { q: id });
+    }
+}
+
+export default new GoodsIdService();

@@ -1,5 +1,4 @@
-import userService from './demoApi';
-
+import userService from './index';
 userService
     .login({ username: 'admin', password: '123456' })
     .then((token) => {

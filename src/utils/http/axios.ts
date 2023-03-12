@@ -3,6 +3,8 @@ import type { Response } from './types';
 // import { Toast } from 'vant';
 import { ElMessage } from 'element-plus';
 import router from '@/router';
+// 重设axiosbaseURL
+axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 
 // 创建axios实例
 const service = axios.create({
@@ -23,8 +25,7 @@ const service = axios.create({
 });
 // axios实例拦截请求
 service.interceptors.request.use(
-    // @ts-expect-error Type 'string' is not assignable to type
-    (config: AxiosRequestConfig) => {
+    (config: AxiosRequestConfig | any) => {
         config.headers = {
             ...config.headers
             // ...auth.headers()
@@ -44,6 +45,7 @@ interface ErrorHandler {
 }
 
 // 实现不同的错误处理器
+// Token 过期错误处理器
 class TokenExpiredErrorHandler implements ErrorHandler {
     handle(response: AxiosResponse<Response>) {
         const errMessage = 'Token expired';
@@ -54,6 +56,7 @@ class TokenExpiredErrorHandler implements ErrorHandler {
     }
 }
 
+// 无权限错误处理器
 class NoPermissionErrorHandler implements ErrorHandler {
     handle(response: AxiosResponse<Response>) {
         const errMessage = 'No permission';
@@ -62,6 +65,7 @@ class NoPermissionErrorHandler implements ErrorHandler {
     }
 }
 
+// 默认错误处理器
 class DefaultErrorHandler implements ErrorHandler {
     handle(response: AxiosResponse<Response>) {
         const { message } = response.data;
@@ -89,12 +93,14 @@ const message = (msg: string) => {
     // 默认使用 Element Plus 的 ElMessage.error 方法
     ElMessage.error(msg);
 };
+
 // 错误拦截器
 const handleError = (error: AxiosError) => {
     message(error.message);
     return Promise.reject(error);
 };
 
+// 添加响应拦截器
 service.interceptors.response.use(handleResponse, handleError);
 
 export type { AxiosResponse, AxiosRequestConfig };

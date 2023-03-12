@@ -3,6 +3,7 @@
 import service, { AxiosRequestConfig } from './axios';
 export * from './types';
 
+// 封装请求
 export const request = <T = any>(config: AxiosRequestConfig): Promise<T> => {
     return new Promise((resolve, reject) => {
         service
@@ -16,7 +17,7 @@ export const request = <T = any>(config: AxiosRequestConfig): Promise<T> => {
             });
     });
 };
-
+// 封装常用的请求方法
 const http = {
     get<T = any>(url: string, params = {}, config?: AxiosRequestConfig): Promise<T> {
         return request({ url, params, ...config, method: 'GET' });

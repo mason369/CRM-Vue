@@ -1,7 +1,7 @@
 {
   "name": "Vue3-project-template",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite --mode development",
@@ -51,6 +51,7 @@
     "vite": "^4.1.0",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^1.0.24"
   },
   "lint-staged": {
