@@ -86,7 +86,7 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
             open      : true,
             proxy     : {
                 '/api-dev': {
-                    target      : 'http://localhost:3000/',
+                    target      : 'http://172.20.10.2:8080/',
                     changeOrigin: true,
                     rewrite     : (path: string) => path.replace(/^\/api-dev/, '')
                 },

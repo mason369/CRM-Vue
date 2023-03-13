@@ -10,8 +10,9 @@ axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 const service = axios.create({
     // 根据不同env设置不同的baseURL
     baseURL          : import.meta.env.VITE_APP_API_BASE_URL,
-    timeout          : 15000,
+    timeout          : 10000,
     responseType     : 'json',
+    headers          : { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     transformResponse: [
         function(data) {
             try {
@@ -68,8 +69,8 @@ class NoPermissionErrorHandler implements ErrorHandler {
 // 默认错误处理器
 class DefaultErrorHandler implements ErrorHandler {
     handle(response: AxiosResponse<Response>) {
-        const { message } = response.data;
-        if (message) ElMessage.error(message);
+        const { reason } = response.data;
+        if (reason) ElMessage.error(reason);
     }
 }
 

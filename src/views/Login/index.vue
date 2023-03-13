@@ -17,7 +17,7 @@
                             <el-form-item label="用户名" prop="name">
                                 <el-input
                                     type="text"
-                                    v-model="formLabelAlign.name"
+                                    v-model="formLabelAlign.username"
                                     placeholder="请输入用户名"
                                     :prefix-icon="User"
                                 />
@@ -27,7 +27,7 @@
                                     type="password"
                                     placeholder="请输入密码"
                                     :prefix-icon="Hide"
-                                    v-model="formLabelAlign.region"
+                                    v-model="formLabelAlign.password"
                                     class="password-input"
                                 />
                             </el-form-item>
@@ -55,7 +55,7 @@
                             <el-form-item label="手机号">
                                 <el-input
                                     type="text"
-                                    v-model="formLabelAlign.name"
+                                    v-model="formLabelAlign.username"
                                     placeholder="请输入手机号"
                                     :prefix-icon="User"
                                 />
@@ -65,7 +65,7 @@
                                         <el-input
                                             class="form-control"
                                             type="text"
-                                            v-model="formLabelAlign.name"
+                                            v-model="formLabelAlign.username"
                                             placeholder="请输入验证码"
                                             :prefix-icon="User"
                                         />
@@ -108,8 +108,8 @@ enum LabelPosition {
 const labelPosition = ref(LabelPosition.Left);
 
 const formLabelAlign = reactive({
-    name  : 'admin',
-    region: '123456'
+    username: 'admin',
+    password: '123456'
 });
 // 登录
 const submitLogin = async() => {
@@ -239,7 +239,8 @@ const getMsg = () => {
     height: 100vh;
     width: 100vw;
     background: linear-gradient(-45deg, #7392fa, #ac40ff);
-
+    //登录阴影
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     .login-box {
         //	居中
         position: absolute;

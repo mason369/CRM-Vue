@@ -15,17 +15,10 @@ import { reactive } from 'vue';
 import { useUserStore } from '@/store/modules/user';
 
 const userStore = useUserStore();
-const userData = reactive({
-    username: 'beibei',
-    password: '1312'
-});
-console.log(userData.password, userData.username);
 const onLogin = async() => {
     // 使用 actions，当作函数一样直接调用
     // login action 定义为了 async 函数，所以它返回一个 Promise
-    await userStore.login(userData);
-    userData.username = '';
-    userData.password = '';
+    await userStore.login();
 };
 onLogin();
 const onLogout = () => {

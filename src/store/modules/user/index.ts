@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import UserLoginService, { UserLogin } from '@/api/user';
+import UserLoginService, { UserTokenTest } from '@/api/user';
 
 export const useUserStore = defineStore('user', {
-    state: (): UserLogin => ({
+    state: (): UserTokenTest => ({
         username: '',
         token   : ''
     }),
@@ -11,9 +11,9 @@ export const useUserStore = defineStore('user', {
     },
     actions: {
         // 异步 action，一般用来处理异步逻辑
-        async login(userData: object): Promise<void> {
-            const data = await UserLoginService.getUserLogin(userData);
-            console.log(data);
+        async login(): Promise<void> {
+            const res = await UserLoginService.getUserLoginTest();
+            console.log(res);
         },
         //同步 action
         logout(): void {

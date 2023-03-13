@@ -5,7 +5,7 @@ export default [
         // 请求地址
         url     : '/api/user/login',
         // 请求方法
-        method  : 'post',
+        method  : 'get',
         // 响应数据
         response: () => {
             return {
