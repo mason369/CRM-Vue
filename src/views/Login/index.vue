@@ -27,7 +27,7 @@
                                     type="password"
                                     placeholder="请输入密码"
                                     :prefix-icon="Hide"
-                                    v-model="formLabelAlign.password"
+                                    v-model="formLabelAlign.pwd"
                                     class="password-input"
                                 />
                             </el-form-item>
@@ -94,8 +94,10 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { Hide, User } from '@element-plus/icons-vue';
-import UserService from '@/api/user';
+import UserService, { IUserLogin } from '@/api/user';
+import { useUserStore } from '@/store/modules/user';
 
+const userStore = useUserStore();
 const checked = ref(false);
 const activeName = ref('first');
 
@@ -107,14 +109,13 @@ enum LabelPosition {
 
 const labelPosition = ref(LabelPosition.Left);
 
-const formLabelAlign = reactive({
+const formLabelAlign = reactive<IUserLogin>({
     username: 'admin',
-    password: '123456'
+    pwd     : '1234q'
 });
-// 登录
+// 登录按钮
 const submitLogin = async() => {
-    const res = await UserService.getUserLogin(formLabelAlign);
-    console.log(res);
+    await userStore.login(formLabelAlign);
 };
 // 表单校验,非空校验、长度校验、正则校验
 const userRules = reactive({
@@ -134,6 +135,8 @@ const userRules = reactive({
         }
     ]
 });
+// 表单校验
+
 // 手机登录获取验证码
 const getMsgLoading = ref(false);
 const getMsg = () => {
@@ -142,7 +145,6 @@ const getMsg = () => {
         getMsgLoading.value = false;
     }, 2000);
 };
-// submitLogin
 </script>
 
 <style lang="scss" scoped>

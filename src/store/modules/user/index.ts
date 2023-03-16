@@ -3,30 +3,51 @@ import UserService, { UserInfo, IUserLogin } from '@/api/user';
 
 export const useUserStore = defineStore('user', {
     state: (): UserInfo => ({
-        id      : 0,
-        username: '',
-        mobile  : 0,
-        email   : ''
+        nickName      : '',
+        pwd           : '',
+        userCreateDate: '',
+        userId        : '',
+        userPermission: '',
+        userPhoneNum  : '',
+        userRole      : '',
+        username      : ''
     }),
     getters: {
-        hello: (state): string => 'Hello!' + state.username
+        hello: (state): string => 'Hello!' + state.nickName
     },
     actions: {
         // 异步 action，一般用来处理异步逻辑
         async login(user: IUserLogin): Promise<void> {
-            const res = await UserService.getUserLogin(user);
-            console.log(res);
+            const { data, code } = await UserService.getUserLogin(user);
+            console.log(data.user);
+            if (code === 1) {
+                this.nickName = data.user.nickName;
+                this.pwd = data.user.pwd;
+                this.userCreateDate = data.user.userCreateDate;
+                this.userId = data.user.userId;
+                this.userPermission = data.user.userPermission;
+                this.userPhoneNum = data.user.userPhoneNum;
+                this.userRole = data.user.userRole;
+                this.username = data.user.username;
+            }
+            console.log(this.nickName);
         },
         //同步 action
         logout(): void {
-            this.id = 0;
+            this.nickName = '';
+            this.pwd = '';
+            this.userCreateDate = '';
+            this.userId = '';
+            this.userPermission = '';
+            this.userPhoneNum = '';
+            this.userRole = '';
             this.username = '';
-            this.mobile = 0;
-            this.email = '';
         }
     },
-    // 开启数据缓存
+    // 开启数据缓存(会话存储)
     persist: {
-        storage: sessionStorage
+        key    : 'userInfo',
+        // 会话存储
+        storage: window.sessionStorage
     }
 });
