@@ -25,6 +25,7 @@ jobs:
       # 执行npm脚本打包项目
       - name: Install and Build
         run: |
+          npm install -g cnpm --registry=https://registry.npm.taobao.org
           cnpm install
           cnpm build
 
