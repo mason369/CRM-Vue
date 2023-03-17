@@ -86,12 +86,12 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
             open      : true,
             proxy     : {
                 '/api-dev': {
-                    target      : 'http://47.92.88.225:8080',
+                    target      : 'http://47.115.224.4:8080',
                     changeOrigin: true,
                     rewrite     : (path: string) => path.replace(/^\/api-dev/, '')
                 },
                 '/api-pro': {
-                    target      : 'http://47.92.88.225:8080',
+                    target      : 'http://47.115.224.4:8080',
                     changeOrigin: true,
                     rewrite     : (path: string) => path.replace(/^\/api-pro/, '')
                 }

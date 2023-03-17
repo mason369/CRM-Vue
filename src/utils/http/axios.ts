@@ -5,14 +5,14 @@ import { ElMessage } from 'element-plus';
 import router from '@/router';
 // 重设axiosbaseURL
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
+axios.defaults.timeout = 1000 * 10;
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 // 创建axios实例
 const service = axios.create({
     // 根据不同env设置不同的baseURL
     baseURL          : import.meta.env.VITE_APP_API_BASE_URL,
-    timeout          : 10000,
     responseType     : 'json',
-    headers          : { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     transformResponse: [
         function(data) {
             try {
@@ -51,7 +51,7 @@ class TokenExpiredErrorHandler implements ErrorHandler {
     handle(response: AxiosResponse<Response>) {
         const errMessage = 'Token expired';
         // 跳转至登录页
-        router.push('/login').then((r) => r);
+        // router.push('/login').then((r) => r);
         // 显示错误提示信息
         ElMessage.error(errMessage);
     }
@@ -69,16 +69,16 @@ class NoPermissionErrorHandler implements ErrorHandler {
 // 默认错误处理器
 class DefaultErrorHandler implements ErrorHandler {
     handle(response: AxiosResponse<Response>) {
-        const { reason } = response.data;
-        if (reason) ElMessage.error(reason);
+        const { message } = response.data;
+        if (message) ElMessage.error(message);
     }
 }
 
 // 错误处理器映射表
 const errorHandlers: Record<number, ErrorHandler> = {
-    0: new DefaultErrorHandler(),
-    1: new TokenExpiredErrorHandler(),
-    2: new NoPermissionErrorHandler()
+    404: new DefaultErrorHandler(),
+    112: new TokenExpiredErrorHandler(),
+    212: new NoPermissionErrorHandler()
 };
 
 // 响应拦截器
