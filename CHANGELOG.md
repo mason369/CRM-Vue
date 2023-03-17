@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/mason369/CRM-Vue/compare/v1.1.0...v1.1.1) (2023-03-17)
+
+
+### update
+
+* 更新街口 ([a3540dc](https://github.com/mason369/CRM-Vue/commit/a3540dc43a9451386018a83eb24504e1e9796cf4))
+
 ## [1.1.0](https://github.com/mason369/CRM-Vue/compare/v1.0.1...v1.1.0) (2023-03-12)
 
 
