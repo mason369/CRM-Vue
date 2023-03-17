@@ -17,7 +17,7 @@ import { IUserLogin } from '@/api/user';
 
 let userInfo = reactive<IUserLogin>({
     username: 'admin',
-    password: 'asdfghjkl123456'
+    pwd     : 'asd456'
 });
 const userStore = useUserStore();
 const onLogin = async() => {

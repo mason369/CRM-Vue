@@ -16,10 +16,10 @@ const pinia = createPinia();
 const base = import.meta.env.BASE_URL;
 console.log('Base URL:', base);
 
+app.use(pinia);
 // piniaPluginPersistedstate是一个插件，用于持久化pinia的状态
 pinia.use(piniaPluginPersistedstate);
 app.use(ElementPlus);
-app.use(pinia);
 app.use(store);
 app.use(router);
 app.mount('#app');

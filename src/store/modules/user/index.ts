@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import UserService, { UserInfo, IUserLogin } from '@/api/user';
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore('userInfo', {
     state: (): UserInfo => ({
         nickName      : '',
         pwd           : '',
@@ -44,10 +44,6 @@ export const useUserStore = defineStore('user', {
             this.username = '';
         }
     },
-    // 开启数据缓存(会话存储)
-    persist: {
-        key    : 'userInfo',
-        // 会话存储
-        storage: window.sessionStorage
-    }
+    // 用于持久化数据
+    persist: true
 });
