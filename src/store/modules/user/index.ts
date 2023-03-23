@@ -9,6 +9,7 @@
 import { defineStore } from 'pinia';
 import UserService, { UserInfo, IUserLogin } from '@/api/user';
 import { storage } from '@/utils/storage';
+import router from '@/router';
 
 /**
  * User Store 模块。
@@ -29,33 +30,32 @@ export const useUserStore = defineStore('userInfo', {
 
     getters: {
         /**
-         * 获取问候语和昵称拼接的字符串.
-         *
-         * @function hello
-         *
-         * @param {UserInfo} state - Vuex Store state 对象, 包含用户信息.
-         *
-         * @returns {String}
-         */
+		 * 获取问候语和昵称拼接的字符串.
+		 *
+		 * @function hello
+		 *
+		 * @param {UserInfo} state - Vuex Store state 对象, 包含用户信息.
+		 *
+		 * @returns {String}
+		 */
         hello: (state): string => 'Hello!' + state.nickName
     },
 
     actions: {
         /**
-         * 处理用户登录逻辑.
-         *
-         * 异步 action，一般用来处理异步逻辑.
-         *
-         * @function login
-         *
-         * @async
-         *
-         * @param {IUserLogin} user - 登录表单数据.
-         *
-         */
+		 * 处理用户登录逻辑.
+		 *
+		 * 异步 action，一般用来处理异步逻辑.
+		 *
+		 * @function login
+		 *
+		 * @async
+		 *
+		 * @param {IUserLogin} user - 登录表单数据.
+		 *
+		 */
         async login(user: IUserLogin): Promise<void> {
             const { data, code } = await UserService.getUserLogin(user);
-            console.log(data.user);
 
             if (code === 1) {
                 this.nickName = data.user.nickName;
@@ -66,18 +66,21 @@ export const useUserStore = defineStore('userInfo', {
                 this.userPhoneNum = data.user.userPhoneNum;
                 this.userRole = data.user.userRole;
                 this.username = data.user.username;
+                console.log(data.user);
                 // 保存用户信息到本地，maxAge 为相对缓存时间，单位s，默认1day，转换为expires(绝对时间)存储，传null不过期
                 storage.setItem('userInfo', JSON.stringify(data.user), null);
+                //跳转到首页
+                await router.push('home');
             }
         },
 
         /**
-         * 处理用户登出逻辑.
-         *
-         * 同步 action.
-         *
-         * @function logout
-         */
+		 * 处理用户登出逻辑.
+		 *
+		 * 同步 action.
+		 *
+		 * @function logout
+		 */
         logout(): void {
             this.nickName = '';
             this.pwd = '';
