@@ -1,4 +1,4 @@
-export const USER_LOGIN = '/c/login';
+export const USER_LOGIN = '/user/login';
 import http, { Response } from '@/utils/http';
 
 // 用户登录

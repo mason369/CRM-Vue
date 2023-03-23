@@ -110,13 +110,14 @@ enum LabelPosition {
 const labelPosition = ref(LabelPosition.Left);
 
 const formLabelAlign = reactive<IUserLogin>({
-    username: 'admin',
-    pwd     : '1234q'
+    username: 'sunwukong',
+    pwd     : 'sunxingzhe'
 });
 // 登录按钮
 const submitLogin = async() => {
     await userStore.login(formLabelAlign);
 };
+
 // 表单校验,非空校验、长度校验、正则校验
 const userRules = reactive({
     name: [
