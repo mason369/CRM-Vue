@@ -1,16 +1,19 @@
+name: Release
+
 on:
   push:
     branches:
       - main
 
-name: Release
-
 jobs:
   release-notes:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
+      
+      # Step 2: Generate release notes
       - name: Generate release notes
         id: gen_release_notes
         uses: github-release-notes/github-release-notes-action@master
@@ -37,15 +40,20 @@ jobs:
                   section: Performance Improvements # 将 [perf] 类型的提交放入名为 "Performance Improvements" 的 section 中
                 - type: test
                   section: Tests # 将 [test] 类型的提交放入名为 "Tests" 的 section 中
-                - type: build
-                  hidden: true # 不将 [build] 类型的提交显示在 changelog 页面上，但会在 release 页面中显示
-                - type: ci
-                  hidden: true # 不将 [ci] 类型的提交显示在 changelog 页面上，但会在 release 页面中显示
 
+      # Step 3：Create Release on GitHub
       - name: Create Release on GitHub
         uses: ncipollo/release-action@v1.7.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts_regex_exclude_list : 'RELEASE_NOTES\.md' # 排除 RELEASE_NOTES.md 文件
-          prerelease_name_append_hash : true     # 可选项，默认值为 false。如果设置为 true，则会在任何预发布版本后附加短哈希。
+          prerelease_name_append_hash : true     # 如果设置为 true，则会在任何预发布版本后附加短哈希。
+          # 自定义版本号和版本名称，可以使用${{}}语法引用环境变量或其他动态值来替换默认值。例如：
+          tag_name : ${{ env.VERSION_NUMBER }}
+          prerelease_name : ${{ env.VERSION_NAME }}
+          draft : false  # 是否将新建 Release 标记为草稿状态，默认为false，即直接发布。
+          title : ${{ steps.gen_release_notes.outputs.title }}  # 发布标题：将提交 subject 当做标题。
+          body : |   # 发布正文：将提交 description 添加到更新说明中。
+            ${{ steps.gen_release_notes.outputs.body }}
+            ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF}/CHANGELOG.md   # 将 CHANGELOG.md 页面链接添加到正文末尾。
