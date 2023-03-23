@@ -1,52 +1,19 @@
+name: Release
 on:
   push:
     branches:
       - main
 
-name: Release
-
 jobs:
-  release-notes:
+  release-please:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Generate release notes
-        id: gen_release_notes
-        uses: github-release-notes/github-release-notes-action@master
+      - uses: GoogleCloudPlatform/release-please-action@v3.4.2
+        id: release
         with:
-          tag: ${{github.ref}}
-          required_labels: 'release'
-          output_file: RELEASE_NOTES.md
-          sections: |
-            changelog:
-              include-body: true 
-          # 启用正文内容
-              path: CHANGELOG.md # 指定 changelog 文件名为 CHANGELOG.md
-              sections:
-                - type: feat
-                  section: Features # 将 [feat] 类型的提交放入名为 "Features" 的 section 中
-                - type: fix
-                  section: Bug Fixes # 将 [fix] 类型的提交放入名为 "Bug Fixes" 的 section 中
-                - type: docs
-                  section: Documentation # 将 [docs] 类型的提交放入名为 "Documentation" 的 section 中
-                - type: style
-                  section: Style Changes # 将 [style] 类型的提交放入名为 "Style Changes" 的 section 中
-                - type: refactor
-                  section: Refactors # 将 [refactor] 类型的提交放入名为 "Refactors" 的 section 中
-                - type: perf
-                  section: Performance Improvements # 将 [perf] 类型的提交放入名为 "Performance Improvements" 的 section 中
-                - type: test
-                  section: Tests # 将 [test] 类型的提交放入名为 "Tests" 的 section 中
-                - type: build
-                  hidden: true # 不将 [build] 类型的提交显示在 changelog 页面上，但会在 release 页面中显示
-                - type: ci
-                  hidden: true # 不将 [ci] 类型的提交显示在 changelog 页面上，但会在 release 页面中显示
-
-      - name: Create Release on GitHub
-        uses: ncipollo/release-action@v1.7.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          artifacts_regex_exclude_list : 'RELEASE_NOTES\.md' # 排除 RELEASE_NOTES.md 文件
-          prerelease_name_append_hash : true     # 可选项，默认值为 false。如果设置为 true，则会在任何预发布版本后附加短哈希。
+          token: ${{ secrets.RELEASE_TOKEN }}
+          release-type: node
+          package-name: standard-version
+          changelog-types: '[{"type": "types", "section":"Types", "hidden": false},{"type": "revert", "section":"Reverts", "hidden": false},{"type": "feat", "section": "Features", "hidden": false},{"type": "fix", "section": "Bug Fixes", "hidden": false},{"type": "improvement", "section": "Feature Improvements", "hidden": false},{"type": "docs", "section":"Docs", "hidden": false},{"type": "style", "section":"Styling", "hidden": false},{"type": "refactor", "section":"Code Refactoring", "hidden": false},{"type": "perf", "section":"Performance Improvements", "hidden": false},{"type": "test", "section":"Tests", "hidden": false},{"type": "build", "section":"Build System", "hidden": false},{"type": "ci", "section":"CI", "hidden":false},{"type": "update", "section":"update", "hidden":false},{"type": "Update", "section":"Update", "hidden":false},{"type": "mods", "section":"MODS", "hidden":false},{"type": "mod", "section":"MOD", "hidden":false},{"type": "更新", "section":"更新", "hidden":false},{"type": "del", "section":"Delete", "hidden":false}]'
+          version: '1.0.0' # 自定义版本号
+          release-as: 'My Custom Release Name' # 自定义版本名称
