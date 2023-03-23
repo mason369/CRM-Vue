@@ -3,7 +3,6 @@ import App from './App.vue';
 import { createPinia } from 'pinia';
 import store from '@/store';
 import { cloneDeep } from 'lodash-es';
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import router from './router';
 import './assets/scss/global.scss';
 import ElementPlus from 'element-plus';
@@ -17,8 +16,6 @@ const base = import.meta.env.BASE_URL;
 console.log('Base URL:', base);
 
 app.use(pinia);
-// piniaPluginPersistedstate是一个插件，用于持久化pinia的状态
-pinia.use(piniaPluginPersistedstate);
 app.use(ElementPlus);
 app.use(store);
 app.use(router);

@@ -14,7 +14,6 @@ export const storage = {
     },
 
     /**
-     *
      * @param key
      * @param value
      * @param maxAge 相对缓存时间，单位s，默认1day，转换为expires(绝对时间)存储，传null不过期

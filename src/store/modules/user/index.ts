@@ -43,7 +43,5 @@ export const useUserStore = defineStore('userInfo', {
             this.userRole = '';
             this.username = '';
         }
-    },
-    // 用于持久化数据
-    persist: true
+    }
 });
