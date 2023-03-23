@@ -21,7 +21,6 @@ jobs:
           sections: |
             changelog:
               include-body: true 
-          # 启用正文内容
               path: CHANGELOG.md # 指定 changelog 文件名为 CHANGELOG.md
               sections:
                 - type: feat
