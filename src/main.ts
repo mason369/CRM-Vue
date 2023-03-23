@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia';
 import store from '@/store';
-import { cloneDeep } from 'lodash-es';
 import router from './router';
 import './assets/scss/global.scss';
 import ElementPlus from 'element-plus';

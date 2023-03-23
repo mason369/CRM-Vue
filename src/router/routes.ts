@@ -8,7 +8,6 @@ export const routes: Array<RouteRecordRaw> = [
         redirect: '/login'
     },
     // 登录
-    // 登录
     {
         path     : '/login',
         name     : 'login',
@@ -19,12 +18,25 @@ export const routes: Array<RouteRecordRaw> = [
         path     : '/home',
         name     : 'home',
         component: () => import('../components/Home/index.vue'),
+        redirect : '/welcome',
         children : [
             // 首页
             {
-                path     : '/index',
-                name     : 'index',
-                component: () => import('../components/Home/index.vue')
+                path     : '/welcome',
+                name     : 'welcome',
+                component: () => import('../views/Welcome/index.vue')
+            },
+            //商品管理
+            {
+                path     : '/goods',
+                name     : 'goods',
+                component: () => import('../views/Goods/index.vue')
+            },
+            //订单管理
+            {
+                path     : '/order',
+                name     : 'order',
+                component: () => import('../views/Order/index.vue')
             }
         ]
     },
