@@ -113,7 +113,13 @@ const formLabelAlign = reactive<IUserLogin>({
     username: 'sunwukong',
     pwd     : 'sunxingzhe'
 });
-// 登录按钮
+/**
+ * 处理用户登录逻辑.
+ * @async
+ * @param {IUserLogin} formLabelAlign 用户登录信息
+ * @returns {Promise<void>}
+ * @example submitLogin(formLabelAlign)
+ */
 const submitLogin = async() => {
     await userStore.login(formLabelAlign);
 };
@@ -138,7 +144,13 @@ const userRules = reactive({
 });
 // 表单校验
 
-// 手机登录获取验证码
+/**
+ * @description 获取验证码
+ * @async
+ * @param {string} phone 手机号
+ * @returns {Promise<void>}
+ * @example getMsg('12345678901')
+ * */
 const getMsgLoading = ref(false);
 const getMsg = () => {
     getMsgLoading.value = true;

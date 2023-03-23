@@ -1,11 +1,33 @@
 export const USER_LOGIN = '/user/login';
 import http, { Response } from '@/utils/http';
 
-// 用户登录
+/**
+ * 表示一个用户登录请求体.
+ *
+ * @interface IUserLogin
+ * @property {string} username - 用户名.
+ * @property {string | number} pwd - 密码.
+ */
 export interface IUserLogin {
     username: string;
     pwd: string | number;
 }
+
+/**
+ * 表示用户信息的接口.
+ *
+ * @interface UserInfo
+ * @property {string} nickName - 用户昵称.
+ * @property {string | number} pwd - 用户密码.
+ * @property {string} userCreateDate - 用户创建时间.
+ * @property {string} userId - 用户 ID.
+ * @property {string} userPermission - 用户权限.
+ * @property {string} userPhoneNum - 用户手机号.
+ * @property {string} userRole - 用户角色.
+ * @property {string} username - 用户名.
+ * @property {string} userCreateDate - 用户创建时间.
+ *
+ */
 export interface UserInfo {
     nickName: string;
     pwd: string | number;
@@ -17,14 +39,36 @@ export interface UserInfo {
     username: string;
 }
 
+/**
+ * 提供用户相关的 API.
+ *
+ * @interface userApi
+ * @property {getUserLogin} getUserLogin - 发起用户登录请求.
+ * @property {getUserInfo} getUserInfo - 发起获取用户信息请求.
+ */
 export interface userApi {
-    //http.post 方法返回的是一个 Promise 对象，它的解析值类型应该是 <AxiosResponse<any>>，而不是 string。如果你想获取到接口返回的结果，应该返回 Promise<AxiosResponse<any>>，或者在 http 模块中对返回值进行处理，只返回响应数据部分。
-    //
-    // 正确的方式是将 Promise<string> 修改为 Promise<AxiosResponse<any>> 或者 Promise<Response<UserInfo>>，具体取决于你想如何处理接口响应数据：
+    /**
+     * 发起用户登录请求.
+     *
+     * @param {IUserLogin} user - 用户登录请求体.
+     * @async
+     * @returns {Promise<Response>} 包含响应数据的 Promise 对象.
+     */
     getUserLogin(user: IUserLogin): Promise<Response>;
 }
 
+/**
+ * 封装和管理与用户相关的 API.
+ *
+ * @class UserService
+ */
 class UserService implements userApi {
+    /**
+     * 发起用户登录请求.
+     * @async
+     * @param {IUserLogin} user - 用户登录请求体.
+     * @returns {Promise<Response>} 包含响应数据的 Promise 对象.
+     */
     getUserLogin(user: IUserLogin): Promise<Response> {
         return http.post(USER_LOGIN, user);
     }
