@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<h3>商品管理</h3>
-	</div>
+    <div>
+        <h3>商品管理</h3>
+    </div>
 </template>
 
 <script setup lang="ts"></script>
