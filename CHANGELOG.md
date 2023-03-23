@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/mason369/CRM-Vue/compare/v1.1.1...v4.4.0) (2023-03-23)
+
+
+### Features
+
+* 更新功能 ([6a7bfad](https://github.com/mason369/CRM-Vue/commit/6a7bfadc9d827958979306eef53fd1a21d8a92af))
+
 ## [1.1.1](https://github.com/mason369/CRM-Vue/compare/v1.1.0...v1.1.1) (2023-03-17)
 
 
