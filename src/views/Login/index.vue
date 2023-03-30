@@ -138,10 +138,10 @@ const formLabelAlign = reactive<IUserLogin>({
     username: 'sunwukong',
     pwd     : 'sunxingzhe'
 });
+
 /**
  * 处理用户登录逻辑.
  * @async
- * @param {IUserLogin} formLabelAlign 用户登录信息
  * @returns {Promise<void>}
  * @example submitLogin(formLabelAlign)
  */
