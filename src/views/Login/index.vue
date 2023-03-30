@@ -1,7 +1,9 @@
 <template>
     <div class="login">
         <el-row class="login-box">
-            <el-col class="login-left" :span="9"><p class="login-title">CRM管理系统</p></el-col>
+            <el-col class="login-left" :span="9"
+                ><p class="login-title">CRM管理系统</p></el-col
+            >
             <!--			<mysvg name="avatar"  color="#165DFF" width=18 height=128></mysvg>-->
             <el-col class="login-right" :span="15">
                 <el-tabs class="login-tabs" v-model="activeName">
@@ -33,17 +35,36 @@
                             </el-form-item>
                             <el-row>
                                 <el-col :span="24" class="login-bottom-info">
-                                    <el-checkbox v-model="checked">记住密码</el-checkbox>
-                                    <el-link class="forget-the-password" type="primary">忘记密码?</el-link>
+                                    <el-checkbox v-model="checked"
+                                        >记住密码</el-checkbox
+                                    >
+                                    <el-link
+                                        class="forget-the-password"
+                                        type="primary"
+                                        >忘记密码?</el-link
+                                    >
                                 </el-col>
                             </el-row>
-                            <el-col :span="24" class="sub-menu-btn" style="text-align: center">
-                                <el-button style="width: 140px" type="primary" @click="submitLogin">登录</el-button>
+                            <el-col
+                                :span="24"
+                                class="sub-menu-btn"
+                                style="text-align: center"
+                            >
+                                <el-button
+                                    style="width: 140px"
+                                    type="primary"
+                                    @click="submitLogin"
+                                    >登录</el-button
+                                >
                                 <el-button style="width: 140px">注册</el-button>
                             </el-col>
                         </el-form>
                     </el-tab-pane>
-                    <el-tab-pane label="手机登录" name="second" class="mobile-login-box">
+                    <el-tab-pane
+                        label="手机登录"
+                        name="second"
+                        class="mobile-login-box"
+                    >
                         <el-form
                             :label-position="labelPosition"
                             label-width="100px"
@@ -81,10 +102,14 @@
                                     </el-col>
                                 </el-row>
                             </el-form-item>
-                            <el-button type="primary" @click="submitLogin">登录</el-button>
+                            <el-button type="primary" @click="submitLogin"
+                                >登录</el-button
+                            >
                         </el-form>
                     </el-tab-pane>
-                    <el-tab-pane label="扫码登录" name="third">扫码登录</el-tab-pane>
+                    <el-tab-pane label="扫码登录" name="third"
+                        >扫码登录</el-tab-pane
+                    >
                 </el-tabs>
             </el-col>
         </el-row>
@@ -113,10 +138,10 @@ const formLabelAlign = reactive<IUserLogin>({
     username: 'sunwukong',
     pwd     : 'sunxingzhe'
 });
+
 /**
  * 处理用户登录逻辑.
  * @async
- * @param {IUserLogin} formLabelAlign 用户登录信息
  * @returns {Promise<void>}
  * @example submitLogin(formLabelAlign)
  */

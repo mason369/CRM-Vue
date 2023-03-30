@@ -30,30 +30,30 @@ export const useUserStore = defineStore('userInfo', {
 
     getters: {
         /**
-		 * 获取问候语和昵称拼接的字符串.
-		 *
-		 * @function hello
-		 *
-		 * @param {UserInfo} state - Vuex Store state 对象, 包含用户信息.
-		 *
-		 * @returns {String}
-		 */
+         * 获取问候语和昵称拼接的字符串.
+         *
+         * @function hello
+         *
+         * @param {UserInfo} state - Vuex Store state 对象, 包含用户信息.
+         *
+         * @returns {String}
+         */
         hello: (state): string => 'Hello!' + state.nickName
     },
 
     actions: {
         /**
-		 * 处理用户登录逻辑.
-		 *
-		 * 异步 action，一般用来处理异步逻辑.
-		 *
-		 * @function login
-		 *
-		 * @async
-		 *
-		 * @param {IUserLogin} user - 登录表单数据.
-		 *
-		 */
+         * 处理用户登录逻辑.
+         *
+         * 异步 action，一般用来处理异步逻辑.
+         *
+         * @function login
+         *
+         * @async
+         *
+         * @param {IUserLogin} user - 登录表单数据.
+         *
+         */
         async login(user: IUserLogin): Promise<void> {
             const { data, code } = await UserService.getUserLogin(user);
 
@@ -75,12 +75,12 @@ export const useUserStore = defineStore('userInfo', {
         },
 
         /**
-		 * 处理用户登出逻辑.
-		 *
-		 * 同步 action.
-		 *
-		 * @function logout
-		 */
+         * 处理用户登出逻辑.
+         *
+         * 同步 action.
+         *
+         * @function logout
+         */
         logout(): void {
             this.nickName = '';
             this.pwd = '';

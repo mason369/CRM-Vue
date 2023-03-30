@@ -4,11 +4,16 @@ import path from 'path';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver, NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import {
+    ElementPlusResolver,
+    NaiveUiResolver
+} from 'unplugin-vue-components/resolvers';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import viteCompression from 'vite-plugin-compression';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { viteMockServe } from 'vite-plugin-mock';
+import { VitePWA } from 'vite-plugin-pwa';
+import preload from 'vite-plugin-preload';
 
 // 接口定义
 interface ViteConfigOptions {
@@ -67,7 +72,40 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
                 mockPath    : './src/mock',
                 //是否开启本地mock
                 localEnabled: true
-            })
+            }),
+            VitePWA({
+                includeAssets: ['favicon.svg'],
+                manifest     : false,
+                registerType : 'autoUpdate',
+                workbox      : {
+                    runtimeCaching: [
+                        {
+                            // 缓存所有接口
+                            urlPattern: /\/api-dev\/|\/api-pro\//,
+                            handler   : 'CacheFirst',
+                            options   : {
+                                cacheName: 'interface-cache'
+                            }
+                        },
+                        {
+                            urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
+                            handler   : 'CacheFirst',
+                            options   : {
+                                cacheName: 'js-css-cache'
+                            }
+                        },
+                        {
+                            urlPattern:
+                                /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+                            handler   : 'CacheFirst',
+                            options   : {
+                                cacheName: 'image-cache'
+                            }
+                        }
+                    ]
+                }
+            }),
+            preload()
         ],
         base: '/CRM-Vue/',
         css : {
@@ -121,7 +159,8 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
             terserOptions: {
                 compress: {
                     keep_infinity: true, // 防止 Infinity 被压缩成 1/0，这可能会导致 Chrome 上的性能问题
-                    drop_console : isProduction && env.VITE_BUILD_DROP_CONSOLE === 'true', // 去除 console
+                    drop_console :
+                        isProduction && env.VITE_BUILD_DROP_CONSOLE === 'true', // 去除 console
                     drop_debugger: isProduction // 去除 debugger
                 }
             },
@@ -130,4 +169,5 @@ function defineConfig({ command, mode }: DefineConfigOptions) {
     };
 }
 
-export default ({ command, mode }: ViteConfigOptions) => defineConfig({ command, mode });
+export default ({ command, mode }: ViteConfigOptions) =>
+    defineConfig({ command, mode });

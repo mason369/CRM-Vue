@@ -35,7 +35,11 @@ const http = {
      @param config AxiosRequestConfig - Axios 请求配置对象，默认为空对象
      @returns Promise<T> - 请求成功后的数据
      */
-    get<T = any>(url: string, params = {}, config?: AxiosRequestConfig): Promise<T> {
+    get<T = any>(
+        url: string,
+        params = {},
+        config?: AxiosRequestConfig
+    ): Promise<T> {
         return request({ url, params, ...config, method: 'GET' });
     },
     /**
@@ -45,7 +49,11 @@ const http = {
      * @param config AxiosRequestConfig - Axios 请求配置对象，默认为空对象
      * @returns Promise<T> - 请求成功后的数据
      */
-    post<T = any>(url: string, data = {}, config?: AxiosRequestConfig): Promise<T> {
+    post<T = any>(
+        url: string,
+        data = {},
+        config?: AxiosRequestConfig
+    ): Promise<T> {
         return request({ url, data, ...config, method: 'POST' });
     },
     /**
@@ -55,7 +63,11 @@ const http = {
      * @param config AxiosRequestConfig - Axios 请求配置对象，默认为空对象
      * @returns Promise<T> - 请求成功后的数据
      */
-    put<T = any>(url: string, data = {}, config?: AxiosRequestConfig): Promise<T> {
+    put<T = any>(
+        url: string,
+        data = {},
+        config?: AxiosRequestConfig
+    ): Promise<T> {
         return request({ url, data, ...config, method: 'PUT' });
     },
     /**
@@ -64,7 +76,11 @@ const http = {
      * @param data Object - 请求参数，默认为空对象
      * @param config AxiosRequestConfig - Axios 请求配置对象，默认为空对象
      */
-    delete<T = any>(url: string, data = {}, config?: AxiosRequestConfig): Promise<T> {
+    delete<T = any>(
+        url: string,
+        data = {},
+        config?: AxiosRequestConfig
+    ): Promise<T> {
         return request({ url, data, ...config, method: 'DELETE' });
     },
     /**
@@ -75,7 +91,11 @@ const http = {
      * @returns Promise<T> - 请求成功后的数据
      */
     // 上传文件，指定 'Content-Type': 'multipart/form-data'
-    upload<T = any>(url: string, data = {}, config?: AxiosRequestConfig): Promise<T> {
+    upload<T = any>(
+        url: string,
+        data = {},
+        config?: AxiosRequestConfig
+    ): Promise<T> {
         return request({
             url,
             data,
