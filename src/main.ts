@@ -6,6 +6,8 @@ import router from './router';
 import './assets/scss/global.scss';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import { useRegisterSW } from 'virtual:pwa-register/vue';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -14,6 +16,7 @@ const pinia = createPinia();
 const base = import.meta.env.BASE_URL;
 console.log('Base URL:', base);
 
+useRegisterSW();
 app.use(pinia);
 app.use(ElementPlus);
 app.use(store);
