@@ -1,5 +1,8 @@
-export const USER_LOGIN = '/user/login';
 import http, { Response } from '@/utils/http';
+// 用户登录
+export const USER_LOGIN = '/user/login';
+// 用户注册
+export const USER_REGISTER = '/user/addUser';
 
 /**
  * 表示一个用户登录请求体.
@@ -11,6 +14,21 @@ import http, { Response } from '@/utils/http';
 export interface IUserLogin {
     username: string;
     pwd: string | number;
+}
+
+/**
+ * 表示一个用户注册请求体.
+ * @interface IUserRegister
+ * @property {string} username - 用户名.
+ * @property {string | number} pwd - 密码.
+ * @property {string} userPhoneNum - 用户手机号.
+ * @property {string} nickName - 用户昵称.
+ * */
+export interface IUserRegister {
+    username: string;
+    pwd: string | number;
+    userPhoneNum: string;
+    nickName: string;
 }
 
 /**
@@ -71,6 +89,16 @@ class UserService implements userApi {
      */
     getUserLogin(user: IUserLogin): Promise<Response> {
         return http.post(USER_LOGIN, user);
+    }
+
+    /**
+     * 发起用户注册请求.
+     * @async
+     * @param {IUserRegister} user - 用户注册请求体.
+     * @returns {Promise<Response>} 包含响应数据的 Promise 对象.
+     */
+    getUserRegister(user: IUserRegister): Promise<Response> {
+        return http.post(USER_REGISTER, user);
     }
 }
 
