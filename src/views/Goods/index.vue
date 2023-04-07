@@ -118,11 +118,11 @@
 </template>
 
 <script setup lang="ts">
-import UserService, { UserList } from '@/api/user';
+import UserService, { AddUser } from '@/api/user';
 import { onMounted, reactive, ref } from 'vue';
 import { ElMessage } from 'element-plus';
 
-const tableData = reactive<UserList[]>([]);
+const tableData = reactive<AddUser[]>([]);
 // 当前页
 const currentPage4 = ref<number>(1);
 // 每页条数
@@ -167,7 +167,7 @@ const getList = async(
     tableData.push(...newData);
 };
 
-const addUserForm = reactive<UserList>({
+const addUserForm = reactive<AddUser>({
     nickName      : 'string',
     pwd           : 'string',
     userCreateDate: '2023-04-07T00:25:39.398Z',
