@@ -79,11 +79,7 @@
         </div>
     </div>
     <!--新增用户对话框-->
-    <el-dialog
-        style="display: flex; flex-direction: column"
-        v-model="dialogFormVisible"
-        title="新增用户"
-    >
+    <el-dialog v-model="dialogFormVisible" title="新增用户" class="dialog-form">
         <el-form :model="addUserForm" label-width="80px">
             <el-form-item label="用户名">
                 <el-input v-model="addUserForm.username" />
@@ -182,7 +178,6 @@ const addOneUser = async() => {
     const { data } = await UserService.getUserAddUser(addUserForm);
     if (data.code === 1) {
         ElMessage.success('新增成功');
-        dialogFormVisible.value = false;
         getList(currentPage4.value, pageSize4.value);
         dialogFormVisible.value = false;
     } else {
@@ -213,5 +208,8 @@ const total = ref<number>(50);
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+.el-dialog__header {
+    display: flex;
 }
 </style>
