@@ -11,15 +11,21 @@
             plain
             @click="addUser"
             :icon="'Plus'"
-            >新增用户</el-button
-        >
+            >新增用户
+        </el-button>
         <div style="margin: 10px 0 0 0">
-            <el-table :data="tableData" style="width: 100%">
+            <el-table align="center" :data="tableData" style="width: 100%">
+                <el-table-column
+                    align="center"
+                    type="index"
+                    label="序号"
+                    width="80"
+                />
                 <el-table-column
                     align="center"
                     prop="username"
                     label="用户名"
-                    width="180"
+                    width="80"
                 />
                 <el-table-column
                     align="center"
@@ -31,6 +37,7 @@
                     align="center"
                     prop="userCreateDate"
                     label="用户创建时间"
+                    width="197"
                 />
                 <el-table-column
                     align="center"
@@ -54,7 +61,7 @@
                     align="center"
                     prop="userRole"
                     label="角色"
-                    width="180"
+                    width="160"
                 />
             </el-table>
             <el-pagination
@@ -72,34 +79,39 @@
         </div>
     </div>
     <!--新增用户对话框-->
-    <el-dialog v-model="dialogFormVisible" title="新增用户">
-        <el-form :model="form">
-            <el-form-item label="用户名" label-width="100px">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+    <el-dialog
+        style="display: flex; flex-direction: column"
+        v-model="dialogFormVisible"
+        title="新增用户"
+    >
+        <el-form :model="addUserForm" label-width="80px">
+            <el-form-item label="用户名">
+                <el-input v-model="addUserForm.username" />
             </el-form-item>
-            <el-form-item label="密码" label-width="100px">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+            <el-form-item label="昵称">
+                <el-input v-model="addUserForm.nickName" />
             </el-form-item>
-            <el-form-item label="昵称" label-width="100px">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+            <el-form-item label="创建时间">
+                <el-input v-model="addUserForm.userCreateDate" />
             </el-form-item>
-            <el-form-item label="手机号" label-width="100px">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+            <el-form-item label="密码">
+                <el-input v-model="addUserForm.pwd" />
             </el-form-item>
-            <el-form-item label="权限" label-width="100px">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+            <el-form-item label="手机号">
+                <el-input v-model="addUserForm.userPhoneNum" />
             </el-form-item>
-            <el-form-item label="角色" label-width="100px">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+            <el-form-item label="权限">
+                <el-input v-model="addUserForm.userPermission" />
+            </el-form-item>
+            <el-form-item label="角色">
+                <el-input v-model="addUserForm.userRole" />
             </el-form-item>
         </el-form>
         <template #footer>
             <span class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">退出</el-button>
                 <el-button @click="resetBtn = false">重置</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false">
-                    提交
-                </el-button>
+                <el-button type="primary" @click="addOneUser"> 提交 </el-button>
             </span>
         </template>
     </el-dialog>
@@ -108,6 +120,7 @@
 <script setup lang="ts">
 import UserService, { UserList } from '@/api/user';
 import { onMounted, reactive, ref } from 'vue';
+import { ElMessage } from 'element-plus';
 
 const tableData = reactive<UserList[]>([]);
 // 当前页
@@ -119,7 +132,6 @@ const background = ref<boolean>(false);
 const disabled = ref<boolean>(false);
 const resetBtn = ref<boolean>(false);
 const dialogFormVisible = ref(false);
-const formLabelWidth = '100px';
 
 onMounted(() => {
     getList(currentPage4.value, pageSize4.value);
@@ -155,19 +167,29 @@ const getList = async(
     tableData.push(...newData);
 };
 
-const form = reactive({
-    name    : '',
-    region  : '',
-    date1   : '',
-    date2   : '',
-    delivery: false,
-    type    : [],
-    resource: '',
-    desc    : ''
+const addUserForm = reactive<UserList>({
+    nickName      : 'string',
+    pwd           : 'string',
+    userCreateDate: '2023-04-07T00:25:39.398Z',
+    userId        : '24323',
+    userPermission: 'string',
+    userPhoneNum  : 'string',
+    userRole      : '只因你太美',
+    username      : 'string'
 });
-
 // 新增用户
-const addUser = () => {
+const addOneUser = async() => {
+    const { data } = await UserService.getUserAddUser(addUserForm);
+    if (data.code === 1) {
+        ElMessage.success('新增成功');
+        dialogFormVisible.value = false;
+        getList(currentPage4.value, pageSize4.value);
+        dialogFormVisible.value = false;
+    } else {
+        ElMessage.error('新增失败');
+    }
+};
+const addUser = async() => {
     dialogFormVisible.value = true;
 };
 
@@ -186,5 +208,10 @@ const total = ref<number>(50);
 .container {
     display: flex;
     flex-direction: column;
+}
+.dialog-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 </style>

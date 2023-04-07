@@ -183,6 +183,7 @@ class UserService implements userApi {
 
     /**
      * 添加用户
+     * @param user 用户信息
      */
     getUserAddUser(user: AddUser): Promise<Response> {
         return http.put(USER_ADD_USER, user);
