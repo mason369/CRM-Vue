@@ -30,7 +30,7 @@ function asyncTryCatch<
             return result as U;
         } catch (e) {
             // 异常处理逻辑
-            console.log(`！！！在 ${func.name} 函数中捕获到异常： ${e}`);
+            // console.log(`！！！在 ${func.name} 函数中捕获到异常： ${e}`);
             return undefined;
         }
     };
