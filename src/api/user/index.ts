@@ -88,7 +88,7 @@ export interface UserInfo {
  * 添加用户信息接口
  * @interface AddUser
  * @property {string} nickName - 用户昵称
- * @property {string | number} pwd - 用户密码
+ * @property {string} pwd - 用户密码
  * @property {string} userCreateDate - 用户创建时间
  * @property {string} userId - 用户 ID
  * @property {string} userPermission - 用户权限

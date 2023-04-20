@@ -164,21 +164,24 @@ const getList = async(
 };
 
 const addUserForm = reactive<AddUser>({
-    nickName      : 'string',
-    pwd           : 'string',
-    userCreateDate: '2023-04-07T00:25:39.398Z',
-    userId        : '24323',
-    userPermission: 'string',
-    userPhoneNum  : 'string',
-    userRole      : '只因你太美',
-    username      : 'string'
+    nickName      : 'amagi',
+    pwd           : 'shuzhi666',
+    // 获取当前时间格式为：2021-04-20T01:16:07.961Z
+    userCreateDate: new Date().toISOString(),
+    // 返回一个随机数五位数到七位数
+    userId        : Math.floor(Math.random() * 1000000 + 100000).toString(),
+    userPermission: '唱',
+    userPhoneNum  : '跳',
+    userRole      : 'rap',
+    username      : '篮球'
 });
 // 新增用户
 const addOneUser = async() => {
-    const { data } = await UserService.getUserAddUser(addUserForm);
-    if (data.code === 1) {
+    const { code } = await UserService.getUserAddUser(addUserForm);
+    console.log(code);
+    if (code === 1) {
         ElMessage.success('新增成功');
-        getList(currentPage4.value, pageSize4.value);
+        await getList(currentPage4.value, pageSize4.value);
         dialogFormVisible.value = false;
     } else {
         ElMessage.error('新增失败');
