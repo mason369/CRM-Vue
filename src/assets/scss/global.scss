@@ -29,7 +29,9 @@ body {
     font-size: 14px;
     line-height: 1.375;
 }
-
+.el-dialog__header{
+    display: flex;
+}
 .warp,
 .wrap {
     width: $content-width;

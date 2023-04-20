@@ -5,7 +5,7 @@
                 <el-icon>
                     <icon-menu />
                 </el-icon>
-                <span>商品管理</span>
+                <span>角色管理</span>
             </el-menu-item>
             <el-menu-item index="order">
                 <el-icon>
