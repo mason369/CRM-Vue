@@ -19,13 +19,13 @@
                     align="center"
                     type="index"
                     label="序号"
-                    width="80"
+                    width="60"
                 />
                 <el-table-column
                     align="center"
                     prop="username"
                     label="用户名"
-                    width="80"
+                    width="100"
                 />
                 <el-table-column
                     align="center"
@@ -80,27 +80,27 @@
     </div>
     <!--新增用户对话框-->
     <el-dialog v-model="dialogFormVisible" title="新增用户" class="dialog-form">
-        <el-form :model="addUserForm" label-width="80px">
+        <el-form :model="userForm" label-width="80px">
             <el-form-item label="用户名">
-                <el-input v-model="addUserForm.username" />
+                <el-input v-model="userForm.username" />
             </el-form-item>
             <el-form-item label="昵称">
-                <el-input v-model="addUserForm.nickName" />
+                <el-input v-model="userForm.nickName" />
             </el-form-item>
             <el-form-item label="创建时间">
-                <el-input v-model="addUserForm.userCreateDate" />
+                <el-input v-model="userForm.userCreateDate" disabled />
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="addUserForm.pwd" />
+                <el-input v-model="userForm.pwd" />
             </el-form-item>
             <el-form-item label="手机号">
-                <el-input v-model="addUserForm.userPhoneNum" />
+                <el-input v-model="userForm.userPhoneNum" />
             </el-form-item>
             <el-form-item label="权限">
-                <el-input v-model="addUserForm.userPermission" />
+                <el-input v-model="userForm.userPermission" />
             </el-form-item>
             <el-form-item label="角色">
-                <el-input v-model="addUserForm.userRole" />
+                <el-input v-model="userForm.userRole" />
             </el-form-item>
         </el-form>
         <template #footer>
@@ -163,26 +163,295 @@ const getList = async(
     tableData.push(...newData);
 };
 
-const addUserForm = reactive<AddUser>({
-    nickName      : 'amagi',
-    pwd           : 'shuzhi666',
-    // 获取当前时间格式为：2021-04-20T01:16:07.961Z
-    userCreateDate: new Date().toISOString(),
-    // 返回一个随机数五位数到七位数
-    userId        : Math.floor(Math.random() * 1000000 + 100000).toString(),
-    userPermission: '唱',
-    userPhoneNum  : '跳',
-    userRole      : 'rap',
-    username      : '篮球'
-});
+// 返回一个字符串，该字符串是一个随机的昵称
+const nickNameRow = () => {
+    const nickNameArr = [
+        '小明',
+        '小红',
+        '小刚',
+        '小花',
+        '小王',
+        '小李',
+        '小张',
+        '小赵',
+        '小孙',
+        '小周',
+        '小吴',
+        '小郑',
+        '小冯',
+        '小陈',
+        '小蒋',
+        '小沈',
+        '小韩',
+        '小杨',
+        '小朱',
+        '小秦',
+        '小尤',
+        '小许',
+        '小何',
+        '小吕',
+        '小施',
+        '小张',
+        '小孔',
+        '小曹',
+        '小严',
+        '小华',
+        '小金',
+        '小魏',
+        '小陶',
+        '小姜',
+        '小戚',
+        '小谢',
+        '小邹',
+        '小喻',
+        '小柏',
+        '小水',
+        '小窦',
+        '小章',
+        '小云',
+        '小苏',
+        '小潘',
+        '小葛',
+        '小奚',
+        '小范',
+        '小彭',
+        '小郎',
+        '小鲁',
+        '小韦',
+        '小昌',
+        '小马',
+        '小苗',
+        '小凤',
+        '小花',
+        '小方',
+        '小俞',
+        '小任',
+        '小袁',
+        '小柳',
+        '小酆',
+        '小鲍',
+        '小史',
+        '小唐',
+        '小费',
+        '小廉',
+        '小岑',
+        '小薛',
+        '小雷',
+        '小贺',
+        '小倪',
+        '小汤',
+        '小滕',
+        '小殷',
+        '小罗',
+        '小毕',
+        '小郝',
+        '小邬',
+        '小安',
+        '小常'
+    ];
+    const nickName =
+        nickNameArr[Math.floor(Math.random() * nickNameArr.length)];
+    return nickName;
+};
+// 返回一个字符串，该字符串是一个随机的用户名
+const nickName = () => {
+    const nickNameArr = [
+        '小明',
+        '小红',
+        '小刚',
+        '小花',
+        '小王',
+        '小李',
+        '小张',
+        '小赵',
+        '小孙',
+        '小周',
+        '小吴',
+        '小郑',
+        '小冯',
+        '小陈',
+        '小蒋',
+        '小沈',
+        '小韩',
+        '小杨',
+        '小朱',
+        '小秦',
+        '小尤',
+        '小许',
+        '小何',
+        '小吕'
+    ];
+    const nickName =
+        nickNameArr[Math.floor(Math.random() * nickNameArr.length)];
+    return nickName;
+};
+// 返回一个字符串，该字符串是一个随机的11位手机号
+const phoneNum = () => {
+    const phoneNumArr = [
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678',
+        '13512345679',
+        '13512345670',
+        '13512345671',
+        '13512345672',
+        '13512345673',
+        '13512345674',
+        '13512345675',
+        '13512345676',
+        '13512345677',
+        '13512345678'
+    ];
+    const phoneNum =
+        phoneNumArr[Math.floor(Math.random() * phoneNumArr.length)];
+    return phoneNum;
+};
+// 返回一个字符串，该字符串是一个随机的用户角色
+const role = () => {
+    const roleArr = [
+        '超级管理员',
+        '管理员',
+        '普通用户',
+        '游客',
+        '人力资源',
+        '财务',
+        '销售',
+        '采购',
+        '仓库',
+        '生产',
+        '质检',
+        '物流',
+        '售后',
+        '客服',
+        '运营',
+        '市场',
+        '商务',
+        '技术',
+        '研发',
+        '设计',
+        '产品',
+        '运维',
+        '测试',
+        '编辑',
+        '客户',
+        '供应商',
+        '合作伙伴',
+        '渠道',
+        '分销',
+        '代理',
+        '厂家'
+    ];
+    const role = roleArr[Math.floor(Math.random() * roleArr.length)];
+    return role;
+};
+// 返回一个字符串，该字符串是一个随机的用户权限
+const permission = () => {
+    const permissionArr = [
+        '所有权限',
+        '仅查看',
+        '仅新增',
+        '仅修改',
+        '仅删除',
+        '仅审核',
+        '仅导出',
+        '仅导入',
+        '仅打印',
+        '仅下载',
+        '仅上传',
+        '仅分享',
+        '仅收藏',
+        '仅点赞',
+        '仅评论'
+    ];
+    const permission =
+        permissionArr[Math.floor(Math.random() * permissionArr.length)];
+    return permission;
+};
+
+// 使用函数将以上信息返回
+const addUserForm = () => {
+    return {
+        nickName      : nickNameRow(),
+        pwd           : 'shuzhi666',
+        // 获取当前时间格式为：2021-04-20T01:16:07.961Z
+        userCreateDate: new Date().toISOString(),
+        // 返回一个随机数五位数到七位数
+        userId        : Math.floor(Math.random() * 1000000 + 100000).toString(),
+        userPermission: permission(),
+        userPhoneNum  : phoneNum(),
+        userRole      : role(),
+        username      : '你干嘛~哈哈~哎呦'
+    };
+};
+
+let userForm = reactive(addUserForm());
 // 新增用户
 const addOneUser = async() => {
-    const { code } = await UserService.getUserAddUser(addUserForm);
+    const { code } = await UserService.getUserAddUser(addUserForm());
     console.log(code);
     if (code === 1) {
         ElMessage.success('新增成功');
         await getList(currentPage4.value, pageSize4.value);
         dialogFormVisible.value = false;
+        userForm = reactive(addUserForm());
     } else {
         ElMessage.error('新增失败');
     }
