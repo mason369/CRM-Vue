@@ -67,7 +67,7 @@
             <el-pagination
                 v-model:current-page="currentPage4"
                 v-model:page-size="pageSize4"
-                :page-sizes="[5, 10, 20, 30]"
+                :page-sizes="[10, 20, 50, 1500]"
                 :small="small"
                 :disabled="disabled"
                 :background="background"
@@ -429,8 +429,18 @@ const permission = () => {
 // 使用函数将以上信息返回
 const addUserForm = () => {
     return {
-        nickName      : nickNameRow(),
-        pwd           : 'shuzhi666',
+        // nickName      : 'amagi',
+        // pwd           : 'ctrlmusic',
+        // // 获取当前时间格式为：2021-04-20T01:16:07.961Z
+        // userCreateDate: new Date().toISOString(),
+        // // 返回一个随机数五位数到七位数
+        // userId        : Math.floor(Math.random() * 1000000 + 100000).toString(),
+        // userPermission: '唱',
+        // userPhoneNum  : '跳',
+        // userRole      : 'rap',
+        // username      : '篮球'
+        nickName      : '唱、跳、rap、篮球、music',
+        pwd           : 'ctrlmusic',
         // 获取当前时间格式为：2021-04-20T01:16:07.961Z
         userCreateDate: new Date().toISOString(),
         // 返回一个随机数五位数到七位数
@@ -438,7 +448,7 @@ const addUserForm = () => {
         userPermission: permission(),
         userPhoneNum  : phoneNum(),
         userRole      : role(),
-        username      : '你干嘛~哈哈~哎呦'
+        username      : nickNameRow()
     };
 };
 
@@ -452,6 +462,7 @@ const addOneUser = async() => {
         await getList(currentPage4.value, pageSize4.value);
         dialogFormVisible.value = false;
         userForm = reactive(addUserForm());
+        console.log(userForm);
     } else {
         ElMessage.error('新增失败');
     }
